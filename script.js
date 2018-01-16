@@ -1,0 +1,64 @@
+var config = {
+    apiKey: "AIzaSyAhXlCqRsh2hXa0M5EMggfWX0sNsfHP-II",
+    authDomain: "rps-multiplayer-b00d5.firebaseapp.com",
+    databaseURL: "https://rps-multiplayer-b00d5.firebaseio.com",
+    projectId: "rps-multiplayer-b00d5",
+    storageBucket: "rps-multiplayer-b00d5.appspot.com",
+    messagingSenderId: "46073764810"
+  };
+  firebase.initializeApp(config);
+
+  var database = firebase.database();
+  var ref = database.ref('scores')
+  ref.on("value", gotData, errData)
+  var score = 0;
+
+function gotData(data){
+    $("#score-display").html("");
+    console.log("got data")
+    var scores = data.val();
+    console.log(scores)
+    var keys = Object.keys(scores);
+    console.log(keys)
+    for(var i = 0; i < keys.length; i++){
+        var keyIndex = keys[i];
+        var initials = scores[keyIndex].name;
+        var score = scores[keyIndex].score;
+        console.log(initials, score)
+        var p = $("<p>")
+        p.text(initials + score)
+        $("#score-display").append(p)
+    }
+}
+
+function errData(err) {
+    console.log("error")
+    console.log(err)
+}
+
+
+  $("#submit").click(function(){
+      submitScore()
+  })
+
+
+  function submitScore() {
+    var data = {
+        name: $("#initials").val(),
+        score: score
+    }
+
+    var ref = database.ref('scores')
+    console.log(data)
+    ref.push(data)
+  }
+
+
+
+  $("#click").click(function(){
+    score++;
+    $("#score").text(score)
+  })
+
+
+
