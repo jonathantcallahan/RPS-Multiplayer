@@ -16,11 +16,12 @@ var config = {
   var chat = database.ref("chat");
 chat.on("value",gotData,errData)
 
-
+$("#chat-input").click(function(){
+    $(this).val("")
+})
 
 $("#enter").click(function(){
     var message = $("#chat-input").val()
-    $("#chat-input").val("")
     console.log(message)
     var userInput = {
         message: message
