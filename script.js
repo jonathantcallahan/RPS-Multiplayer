@@ -16,8 +16,11 @@ var config = {
   var chat = database.ref("chat");
 chat.on("value",gotData,errData)
 
+
+
 $("#enter").click(function(){
     var message = $("#chat-input").val()
+    $("#chat-input").val("")
     console.log(message)
     var userInput = {
         message: message
