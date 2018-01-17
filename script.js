@@ -8,57 +8,89 @@ var config = {
   };
   firebase.initializeApp(config);
 
-  var database = firebase.database();
-  var ref = database.ref('scores')
-  ref.on("value", gotData, errData)
-  var score = 0;
+  var userOneSelected = false;
+  var userTwoSelected = false;
+  var userOneChoice;
+  var userTwoChoice;
 
-function gotData(data){
-    $("#score-display").html("");
-    console.log("got data")
-    var scores = data.val();
-    console.log(scores)
-    var keys = Object.keys(scores);
-    console.log(keys)
-    for(var i = 0; i < keys.length; i++){
-        var keyIndex = keys[i];
-        var initials = scores[keyIndex].name;
-        var score = scores[keyIndex].score;
-        console.log(initials, score)
-        var p = $("<p>")
-        p.text(initials + score)
-        $("#score-display").append(p)
+
+
+  $(".choice").click(function(){
+    var choice = $(this).attr("id")
+    console.log(userOneSelected)
+    if(!userOneSelected){
+        userOneChoice = choice;
+        userOneSelected = true;
+        console.log(userOneSelected)
+    $("#user-one-choice").text(choice)
+    }else if(!userTwoSelected){
+        userTwoChoice = choice;
+        userTwoSelected = true;
+        $("#user-two-choice").text(choice);
+        setWinner();
     }
-}
-
-function errData(err) {
-    console.log("error")
-    console.log(err)
-}
-
-
-  $("#submit").click(function(){
-      submitScore()
   })
 
-
-  function submitScore() {
-    var data = {
-        name: $("#initials").val(),
-        score: score
+  function setWinner(){
+    if((userOneChoice === "rock") && (userTwoChoice === "paper")){
+        $("#results").text("User One Wins")
+        console.log("test")
     }
-
-    var ref = database.ref('scores')
-    console.log(data)
-    ref.push(data)
+    if((userOneChoice === "rock") && (userTwoChoice === "scissors")){
+        $("#results").text("User Two Wins")
+    }
   }
 
+  //var database = firebase.database();
+  //var ref = database.ref('scores')
+  //ref.on("value", gotData, errData)
+  //var score = 0;
 
-
-  $("#click").click(function(){
-    score++;
-    $("#score").text(score)
-  })
-
+//function gotData(data){
+//    $("#score-display").html("");
+//    console.log("got data")
+//    var scores = data.val();
+//    console.log(scores)
+//    var keys = Object.keys(scores);
+//    console.log(keys)
+//    for(var i = 0; i < keys.length; i++){
+//        var keyIndex = keys[i];
+//        var initials = scores[keyIndex].name;
+//        var score = scores[keyIndex].score;
+//        console.log(initials, score)
+//        var p = $("<p>")
+//        p.text(initials + score)
+//        $("#score-display").append(p)
+//    }
+//}
+//
+//function errData(err) {
+//    console.log("error")
+//    console.log(err)
+//}
+//
+//
+//  $("#submit").click(function(){
+//      submitScore()
+//  })
+//
+//
+//  function submitScore() {
+//    var data = {
+//        name: $("#initials").val(),
+//        score: score
+//    }
+//
+//    var ref = database.ref('scores')
+//    console.log(data)
+//    ref.push(data)
+//  }
+//
+//
+//
+//  $("#click").click(function(){
+//    score++;
+//    $("#score").text(score)
+//})
 
 
