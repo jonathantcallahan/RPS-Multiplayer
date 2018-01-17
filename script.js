@@ -12,7 +12,40 @@ var config = {
   var userTwoSelected = false;
   var userOneChoice;
   var userTwoChoice;
+  var database = firebase.database();
+  var chat = database.ref("chat");
+chat.on("value",gotData,errData)
 
+$("#enter").click(function(){
+    var message = $("#chat-input").val()
+    console.log(message)
+    var userInput = {
+        message: message
+    }
+    chat.push(userInput)
+    console.log(userInput)
+})
+
+function gotData(data){
+    var chatLog = data.val();
+    console.log(chatLog)
+    var keys = Object.keys(chatLog)
+    console.log(keys)
+    $("#chat-box").empty();
+    for(var i = 0; i < keys.length; i++){
+        var keyIndex = keys[i];
+        var chatEntry = chatLog[keyIndex].message;
+        console.log(chatEntry)
+        var p = $("<p>")
+        p.text(chatEntry)
+        $("#chat-box").append(p)
+    }
+}
+
+function errData(data){
+    console.log(data);
+    console.log("Error")
+}
 
 
   $(".choice").click(function(){
@@ -41,7 +74,7 @@ var config = {
     }
   }
 
-  //var database = firebase.database();
+
   //var ref = database.ref('scores')
   //ref.on("value", gotData, errData)
   //var score = 0;
