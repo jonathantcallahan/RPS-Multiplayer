@@ -47,6 +47,10 @@ function errData(data){
     console.log("Error")
 }
 
+$("#clear-chat").click(function(){
+    console.log(chat)
+    chat.remove();
+})
 
   $(".choice").click(function(){
     var choice = $(this).attr("id")
