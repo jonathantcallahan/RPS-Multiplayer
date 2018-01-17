@@ -8,13 +8,25 @@ var config = {
   };
   firebase.initializeApp(config);
 
-  var userOneSelected = false;
-  var userTwoSelected = false;
-  var userOneChoice;
-  var userTwoChoice;
-  var database = firebase.database();
-  var chat = database.ref("chat");
-chat.on("value",gotData,errData)
+var userOneSelected = false;
+var userTwoSelected = false;
+var userOneChoice;
+var userTwoChoice;
+var database = firebase.database();
+var chat = database.ref("chat");
+var playerOneChoice = database.ref("player-one-choice");
+playerOneChoice.on("value",got1Data,err1Data)
+chat.on("value",gotChatData,errChatData)
+
+function got1Data(data){
+    var userChoice = data.val()
+    console.log(userChoice)
+}
+
+function err1Data(data){
+    console.log("error data")
+    console.log(data)
+}
 
 $("#chat-input").click(function(){
     $(this).val("")
@@ -30,7 +42,7 @@ $("#enter").click(function(){
     console.log(userInput)
 })
 
-function gotData(data){
+function gotChatData(data){
     var chatLog = data.val();
     console.log(chatLog)
     var keys = Object.keys(chatLog)
@@ -46,7 +58,7 @@ function gotData(data){
     }
 }
 
-function errData(data){
+function errChatData(data){
     console.log(data);
     console.log("Error")
 }
@@ -63,7 +75,15 @@ $("#clear-chat").click(function(){
         userOneChoice = choice;
         userOneSelected = true;
         console.log(userOneSelected)
-    $("#user-one-choice").text(choice)
+        var userChoice = {
+            choice: choice,
+        }
+        playerOneChoice.push(userChoice)
+        var keys = Object.keys(data.val())
+        console.log(keys)
+        var keyIndex = keys[1];
+        var choiceResult = 
+        $("#user-one-choice").text(choice)
     }else if(!userTwoSelected){
         userTwoChoice = choice;
         userTwoSelected = true;
