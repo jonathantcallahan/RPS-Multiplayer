@@ -21,6 +21,7 @@ playerTwoChoice.on("value",got2Data,err2Data)
 chat.on("value",gotChatData,errChatData)
 
 function got1Data(data){
+    userOneSelected = true;
     console.log("tessstttt")
     var userChoice = data.val()
     console.log("user choice" + userChoice)
@@ -31,9 +32,11 @@ function got1Data(data){
     console.log(finalChoice)
     $("#user-one-choice").text(finalChoice)
     playerOneChoice.remove()
+    console.log(userTwoSelected)
 }
 
 function got2Data(data){
+    userTwoSelected = true;
     console.log("tessstttt")
     var userChoice = data.val()
     console.log("user choice" + userChoice)
@@ -43,7 +46,7 @@ function got2Data(data){
     var finalChoice = userChoice[key1].choice;
     console.log(finalChoice)
     $("#user-two-choice").text(finalChoice)
-    playerOneChoice.remove()
+    playerTwoChoice.remove()
 }
 
 function err1Data(data){
@@ -101,7 +104,7 @@ $("#clear-chat").click(function(){
     console.log(userOneSelected)
     if(!userOneSelected){
         userOneChoice = choice;
-        userOneSelected = true;
+        
         console.log(userOneSelected)
         var userChoice = {
             choice: choice,
@@ -109,7 +112,7 @@ $("#clear-chat").click(function(){
         playerOneChoice.push(userChoice)
     }else if(!userTwoSelected){
         userTwoChoice = choice;
-        userTwoSelected = true;
+        console.log("test 2")
         var userChoice = {
             choice: choice,
         }
@@ -125,6 +128,21 @@ $("#clear-chat").click(function(){
     }
     if((userOneChoice === "rock") && (userTwoChoice === "scissors")){
         $("#results").text("User Two Wins")
+    }
+    if((userOneChoice === "paper") && (userTwoChoice === "scissors")){
+        $("#results").text("User Two Wins")
+    }
+    if((userOneChoice === "paper") && (userTwoChoice === "rock")){
+        $("#results").text("User One Wins")
+    }
+    if((userOneChoice === "scissors") && (userTwoChoice === "rock")){
+        $("#results").text("User Two Wins")
+    }
+    if((userOneChoice === "scissors") && (userTwoChoice === "paper")){
+        $("#results").text("User One Wins")
+    }
+    if(userOneChoice === userTwoChoice){
+        $("results").text("Users Tied")
     }
   }
 
@@ -179,5 +197,3 @@ $("#clear-chat").click(function(){
 //    score++;
 //    $("#score").text(score)
 //})
-
-
