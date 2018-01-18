@@ -19,8 +19,14 @@ playerOneChoice.on("value",got1Data,err1Data)
 chat.on("value",gotChatData,errChatData)
 
 function got1Data(data){
+    console.log("tessstttt")
     var userChoice = data.val()
-    console.log(userChoice)
+    console.log("user choice" + userChoice)
+    var keys = Object.keys(userChoice)
+    console.log("keys" + keys)
+    var key1 = keys[0];
+    var finalChoice = userChoice[key1].choice;
+    console.log(finalChoice)
 }
 
 function err1Data(data){
@@ -79,10 +85,7 @@ $("#clear-chat").click(function(){
             choice: choice,
         }
         playerOneChoice.push(userChoice)
-        var keys = Object.keys(data.val())
-        console.log(keys)
-        var keyIndex = keys[1];
-        var choiceResult = 
+        
         $("#user-one-choice").text(choice)
     }else if(!userTwoSelected){
         userTwoChoice = choice;
