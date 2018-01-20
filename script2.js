@@ -10,6 +10,7 @@ var config = {
 
 var userOneSelected = false;
 var userTwoSelected = false;
+var isUserOne = false;
 var userOneChoice;
 var userTwoChoice;
 var database = firebase.database();
@@ -19,6 +20,11 @@ var playerTwoChoice = database.ref("player-two-choice");
 var gameOver = database.ref("game-over")
 let newChoice1;
 let newChoice2;
+gameOver.set({
+    gameStatus: false,
+})
+playerOneChoice.remove()
+playerTwoChoice.remove()
 gameOver.on("value",
     function(snapshot){
         gameIsOver = snapshot.val().gameStatus
@@ -35,15 +41,24 @@ gameOver.on("value",
 playerOneChoice.on("value",
     function(snapshot){
         console.log(snapshot.val().choice)
+        if(snapshot.val().choice){ 
+        console.log("player one selected")
         userOneSelected = true;
         newChoice1 = snapshot.val().choice
+        } else {
+            return;
+        }
     },
     function(snapshot){
         console.log("error")
     })
 playerTwoChoice.on("value",
     function(snapshot){
+        if(snapshot.val().choice){
         newChoice2 = snapshot.val().choice
+        } else {
+            return;
+        }
     },
     function(snapshot){
         console.log("error")
@@ -101,14 +116,15 @@ $("#clear-chat").click(function(){
         playerOneChoice.set({
             choice: choice,
         })
-    }else if(!userTwoSelected){
+        isUserOne = true;
+    }else if((!userTwoSelected) && (!isUserOne)) {
         userTwoChoice = choice;
         console.log("test 2")
         playerTwoChoice.set({
             choice: choice,
         })
         gameOver.set({
-            gameStatus: true;
+            gameStatus: true,
         })
         setWinner();
     }
