@@ -8,6 +8,13 @@ var config = {
   };
   firebase.initializeApp(config);
 
+$(".rps-image").click(function(){
+    if(userOneSelected || userTwoSelected){
+        return;
+    }
+    $(this).addClass("clicked-image");
+})
+
 var userOneSelected = false;
 var userTwoSelected = false;
 var isUserOne = false;
@@ -42,7 +49,7 @@ playerOneChoice.on("value",
     function(snapshot){
         console.log(snapshot.val().choice)
         if(snapshot.val().choice){ 
-        console.log("player one selected")
+        console.log("player one selectedd")
         userOneSelected = true;
         newChoice1 = snapshot.val().choice
         } else {
@@ -92,7 +99,7 @@ function gotChatData(data){
         var chatEntry = chatLog[keyIndex].message;
         console.log(chatEntry)
         var p = $("<p>")
-        p.text(chatEntry)
+        p.text(chatEntry).addClass("chat-entry")
         $("#chat-box").append(p)
     }
 }

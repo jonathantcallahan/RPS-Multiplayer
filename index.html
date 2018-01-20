@@ -1,28 +1,84 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
+        <style>
 
+            h1 {
+                text-align: center;
+            
+            }
+            * {
+                background-color: #fee50c;
+                font-family: 'Fjalla One', sans-serif;
+            }
+
+            main {
+                width: 70%;
+                margin-right: auto;
+                margin-left: auto;
+            }
+
+            #choice-holder{
+                background-color: #fee50c;
+                text-align: center;
+                height: 275px;
+                padding-top: 30px;
+            }
+            .choice {
+                display: inline-block;
+            }
+
+            .rps-image {
+                height: 200px;
+                margin: 0px;
+                padding: 0px;
+            }
+
+            .clicked-image {
+                height: 200px;
+                margin: 0px;
+                padding: 0px;
+                box-shadow: 0px 0px 5px red;
+
+            }
+
+            #chat-box {
+                width: 100%;
+                background-color: white;
+                padding: 15px;
+
+            } 
+            
+            .chat-entry {
+                
+                background-color: white;
+            
+            }
+            
+        </style>
     </head>
     <body> 
-        <h1>Rock, Paper, Scissors</h1>
-        <div id="choice-holder">
-            <div class="choice" id="rock">Rock</div>
-            <div class="choice" id="paper">Paper</div>
-            <div class="choice" id="scissors">Scissors</div>
-        </div>
-        <div id="user-one-choice"></div>
-        <div id="user-two-choice"></div>
-        <div id="results"></div>
-        <input id="chat-input" type="text"><div id="enter">Enter</div>
-        <div id="chat-box"></div>
-        <div id="clear-chat">Clear Chat</div>
-        <div id="reset-game">Reset Game</div>
-        <script 
-            src="https://code.jquery.com/jquery-3.2.1.js"
-            integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
-            crossorigin="anonymous"></script>
-        <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
-        <script src="script2.js"></script>
-
+        <main>
+            <h1>Have a friend open the game in another window and select an option to begin!</h1>
+            <div id="choice-holder">
+                <div class="choice" id="rock"><img class="rps-image" src="r.jpg"></div>
+                <div class="choice" id="paper"><img class="rps-image" src="p.jpg"></div>
+                <div class="choice" id="scissors"><img class="rps-image" src="s.jpg"></div>
+            </div>
+            <div id="user-one-choice"></div>
+            <div id="user-two-choice"></div>
+            <div id="results"></div>
+            <input id="chat-input" type="text"><div id="enter">Enter</div>
+            <div id="chat-box"></div>
+            <div id="clear-chat">Clear Chat</div>
+            <div id="reset-game">Reset Game</div>
+            <script 
+                src="https://code.jquery.com/jquery-3.2.1.js"
+                integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+                crossorigin="anonymous"></script>
+            <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
+            <script src="script2.js"></script>
+        </main>
     </body>
 </html>
