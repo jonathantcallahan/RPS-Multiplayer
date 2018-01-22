@@ -31,7 +31,7 @@ var playerTwoChoice = database.ref("player-two-choice");
 var gameOver = database.ref("game-over")
 let newChoice1;
 let newChoice2;
-var userName = prompt("Enter your username")
+var userName = prompt("Please enter a username for the in-game chat:")
 
 
 
