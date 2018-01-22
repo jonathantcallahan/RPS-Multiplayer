@@ -35,6 +35,10 @@
                 padding: 0px;
             }
 
+            .rps-image:hover {
+                box-shadow: 0px 0px 5px red;
+            }
+
             .clicked-image {
                 height: 200px;
                 margin: 0px;
@@ -50,10 +54,29 @@
 
             } 
             
-            .chat-entry {
-                
+            #chat-input {
+                padding: 15px 15px 15px;
                 background-color: white;
+                width: 100%;
+                border: none;
+                border-color: transparent;
+                border-top: solid 1px #fee50c;
             
+            }
+
+            #chat-container {
+                width: 70%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            #enter {
+                margin: 10px 0px 0px 15px;
+                font-weight: bold;
+            }
+
+            #enter:hover {
+                color: green;
             }
             
         </style>
@@ -69,8 +92,11 @@
             <div id="user-one-choice"></div>
             <div id="user-two-choice"></div>
             <div id="results"></div>
-            <input id="chat-input" type="text"><div id="enter">Enter</div>
-            <div id="chat-box"></div>
+            <div id="chat-container">
+                <div id="chat-box"></div>
+                <input id="chat-input" type="text" value="Enter your message here!"></input>
+                <div id="enter">Enter</div>
+            </div>
             <div id="clear-chat">Clear Chat</div>
             <div id="reset-game">Reset Game</div>
             <script 

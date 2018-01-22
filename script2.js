@@ -15,6 +15,10 @@ $(".rps-image").click(function(){
     $(this).addClass("clicked-image");
 })
 
+$("#chat-input").click(function(){
+    $(this).val("")
+})
+
 var userOneSelected = false;
 var userTwoSelected = false;
 var isUserOne = false;
@@ -36,6 +40,7 @@ gameOver.on("value",
     function(snapshot){
         gameIsOver = snapshot.val().gameStatus
         if(gameIsOver === true){
+            setWinner();
             $("#user-one-choice").text("User one chose " + newChoice1)
             $("#user-two-choice").text("User two chose " + newChoice2)
         } else {
@@ -47,8 +52,8 @@ gameOver.on("value",
     })
 playerOneChoice.on("value",
     function(snapshot){
-        console.log(snapshot.val().choice)
-        if(snapshot.val().choice){ 
+        console.log(snapshot.val())
+        if(snapshot.val()){ 
         console.log("player one selectedd")
         userOneSelected = true;
         newChoice1 = snapshot.val().choice
@@ -61,7 +66,8 @@ playerOneChoice.on("value",
     })
 playerTwoChoice.on("value",
     function(snapshot){
-        if(snapshot.val().choice){
+        if(snapshot.val()){
+            console.log("recieved user two choice data")
         newChoice2 = snapshot.val().choice
         } else {
             return;
@@ -126,6 +132,7 @@ $("#clear-chat").click(function(){
         isUserOne = true;
     }else if((!userTwoSelected) && (!isUserOne)) {
         userTwoChoice = choice;
+        userTwoSelected = true;
         console.log("test 2")
         playerTwoChoice.set({
             choice: choice,
@@ -133,14 +140,18 @@ $("#clear-chat").click(function(){
         gameOver.set({
             gameStatus: true,
         })
-        setWinner();
     }
   })
 
   function setWinner(){
+      console.log("set winner ran")
+      console.log(userOneChoice, userTwoChoice)
+      userOneChoice = newChoice1;
+      userTwoChoice = newChoice2;
+      console.log(userOneChoice, userTwoChoice)
     if((userOneChoice === "rock") && (userTwoChoice === "paper")){
         $("#results").text("User One Wins")
-        console.log("test")
+        console.log("test game ran")
     }
     if((userOneChoice === "rock") && (userTwoChoice === "scissors")){
         $("#results").text("User Two Wins")
