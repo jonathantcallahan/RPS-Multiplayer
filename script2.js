@@ -31,11 +31,16 @@ var playerTwoChoice = database.ref("player-two-choice");
 var gameOver = database.ref("game-over")
 let newChoice1;
 let newChoice2;
+var userName = prompt("Enter your username")
+
+
+
 gameOver.set({
     gameStatus: false,
 })
-playerOneChoice.remove()
-playerTwoChoice.remove()
+
+
+
 gameOver.on("value",
     function(snapshot){
         gameIsOver = snapshot.val().gameStatus
@@ -86,9 +91,13 @@ $("#chat-input").click(function(){
 
 $("#enter").click(function(){
     var message = $("#chat-input").val()
+    if((message === "Enter your message here!") || (message === "")){
+        alert("You need to enter a message first!")
+        return;
+    }
     console.log(message)
     var userInput = {
-        message: message
+        message: (userName + " : " + message)
     }
     chat.push(userInput)
     console.log(userInput)
@@ -118,6 +127,11 @@ function errChatData(data){
 $("#clear-chat").click(function(){
     console.log(chat)
     chat.remove();
+    var clearChat = {
+        message: " "
+    }
+    chat.push(clearChat)
+
 })
 
   $(".choice").click(function(){
