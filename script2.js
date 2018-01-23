@@ -13,6 +13,7 @@ $(".rps-image").click(function(){
         return;
     }
     $(this).addClass("clicked-image");
+    console.log()
 })
 
 $("#chat-input").click(function(){
@@ -93,6 +94,17 @@ $("#chat-input").click(function(){
 })
 
 $("#enter").click(function(){
+    enterChat();
+})
+
+$("#chat-input").keydown(function(event){
+    if(event.keyCode === 13){
+        enterChat()
+        $(this).val("")
+    }
+})
+
+function enterChat(){
     var message = $("#chat-input").val()
     if((message === "Enter your message here!") || (message === "")){
         alert("You need to enter a message first!")
@@ -104,7 +116,7 @@ $("#enter").click(function(){
     }
     chat.push(userInput)
     console.log(userInput)
-})
+}
 
 function gotChatData(data){
     var chatLog = data.val();
@@ -167,11 +179,11 @@ $("#clear-chat").click(function(){
       userTwoChoice = newChoice2;
       console.log(userOneChoice, userTwoChoice)
     if((userOneChoice === "rock") && (userTwoChoice === "paper")){
-        $("#results").text("User One Wins")
+        $("#results").text("User Two Wins")
         console.log("test game ran")
     }
     if((userOneChoice === "rock") && (userTwoChoice === "scissors")){
-        $("#results").text("User Two Wins")
+        $("#results").text("User One Wins")
     }
     if((userOneChoice === "paper") && (userTwoChoice === "scissors")){
         $("#results").text("User Two Wins")
