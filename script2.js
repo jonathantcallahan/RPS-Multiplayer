@@ -39,6 +39,9 @@ gameOver.set({
     gameStatus: false,
 })
 
+playerOneChoice.remove();
+playerTwoChoice.remove();
+
 
 
 gameOver.on("value",
