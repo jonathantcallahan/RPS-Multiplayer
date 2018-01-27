@@ -44,8 +44,10 @@ connectionsRef.once("value",function(response){
     console.log(permKey)
 })
 
+function retrieveFbData(){
 
-var user = database.ref("/connections/" + key)
+}
+var user = database.ref("/connections/" + permKey)
 console.log(user)
 user.on("value",function(snapshot){
     console.log(snapshot.val())
