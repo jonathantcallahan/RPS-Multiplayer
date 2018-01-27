@@ -12,38 +12,45 @@ firebase.initializeApp(config);
 var database = firebase.database()
 var connected = database.ref(".info/connected")
 var connectionsRef = database.ref("/connections")
-var users = database.ref("users")
-var tempKey;
 var permKey;
-
 var userName = prompt("enter username")
+
 if(!userName){
     userName = "Anonymous User"
 }
 
 connected.on("value",function(response){
-    connectionsRef.push({
+    var user = connectionsRef.push({
         entry: "test entry",
+        name: userName
     })
+
+    user.onDisconnect().remove
 })
 
 connectionsRef.on("child_added",function(response){
-    var key = response.key;
-    tempKey = key;
-    console.log(key)
+    key = response.key;
+    name = response.val().name;
+    console.log(name)
+    var p = $("<p>")
+    p.attr("key", key)
+    p.text(name)
+    console.log(response.val())
+    $("#available-opponents").append(p)
 })
 
 connectionsRef.once("value",function(response){
-    var firebaseArrayLen = response.val();
-    console.log(firebaseArrayLen)
-    permKey = tempKey;
+    permKey = key;
     console.log(permKey)
-    var p = $("<p>")
-    p.text
-    users.ref(userName).set({
-        key: permKey
-    })
+})
 
+
+var user = database.ref("/connections/" + key)
+console.log(user)
+user.on("value",function(snapshot){
+    console.log(snapshot.val())
+}, function(errData){
+    console.log("Error")
 })
 
 
