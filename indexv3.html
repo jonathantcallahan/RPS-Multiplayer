@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
+        <style>
+
+            h1 {
+                text-align: center;
+            
+            }
+            * {
+                background-color: #fee50c;
+                font-family: 'Fjalla One', sans-serif;
+            }
+
+            main {
+                width: 70%;
+                margin-right: auto;
+                margin-left: auto;
+            }
+
+            #choice-holder{
+                background-color: #fee50c;
+                text-align: center;
+                height: 275px;
+                padding-top: 30px;
+            }
+            .choice {
+                display: inline-block;
+            }
+
+            .rps-image {
+                height: 200px;
+                margin: 0px;
+                padding: 0px;
+            }
+
+            .rps-image:hover {
+                box-shadow: 0px 0px 5px red;
+            }
+
+            .clicked-image {
+                height: 200px;
+                margin: 0px;
+                padding: 0px;
+                box-shadow: 0px 0px 5px red;
+
+            }
+
+            #chat-box {
+                width: 100%;
+                background-color: white;
+                padding: 15px;
+                border-radius: 12px 12px 0px 0px;
+
+            } 
+            
+            #chat-input {
+                padding: 15px 15px 15px;
+                background-color: white;
+                width: 100%;
+                border: none;
+                border-color: transparent;
+                border-top: solid 1px #fee50c;
+            
+            }
+
+            .chat-entry {
+                background-color: white;
+                padding: 2px 0px 8px;
+                border-bottom: 1px solid #fee50c;
+                width: 80%;
+            }
+
+            #content-container {
+                width: 70%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            #enter {
+                margin: 10px 0px 0px 15px;
+                font-weight: bold;
+            }
+
+            #enter:hover {
+                color: green;
+            }
+
+            #clear-chat {
+                margin: 4px 15px;
+                font-size: 12px;
+            }
+
+            .user-choice {
+                display: inline-block;
+                width: 45%;
+                text-align: center;
+                font-size: 30px;
+            }
+
+            #reset-game {
+                text-align: center;
+            }
+
+            #results {
+                text-align: center;
+                margin: 40px 0px;
+                font-size: 70px;
+            }
+
+            #chat-title {
+                text-align: center;
+            }
+            
+        </style>
+    </head>
+    <body> 
+        <main>
+            <h1>Have a friend open the game in another window and select an option to begin!</h1>
+            <div id="reset-game">Refresh your browser in both windows to reset the game</div>
+            <div id="choice-holder">
+                <div class="choice" id="rock"><img class="rps-image" src="r.jpg"></div>
+                <div class="choice" id="paper"><img class="rps-image" src="p.jpg"></div>
+                <div class="choice" id="scissors"><img class="rps-image" src="s.jpg"></div>
+            </div>
+            <div id="content-container">
+                <div id="user-choices">
+                        <div class="user-choice" id="user-one-choice"></div>
+                        <div class="user-choice" id="user-two-choice"></div>
+                </div>
+                <div id="results"></div>
+                <h3 id="chat-title">CHAT LOG</h3>
+                <div id="chat-box"></div>
+                <input id="chat-input" type="text" value="Enter your message here!"></input>
+                <div id="enter">Enter</div>
+                <div id="clear-chat">Clear Chat</div>
+            </div>
+        </main>
+        <div id="available-opponents">
+        </div>
+            
+            <script 
+                src="https://code.jquery.com/jquery-3.2.1.js"
+                integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+                crossorigin="anonymous"></script>
+            <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
+            <script src="script3.js"></script>
+        
+    </body>
+</html>

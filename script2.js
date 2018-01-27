@@ -30,6 +30,7 @@ gameOver.set({
 playerOneChoice.remove();
 playerTwoChoice.remove();
 
+
 $(".rps-image").click(function(){
     if(userOneSelected){
         return;
